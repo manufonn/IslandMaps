@@ -1,0 +1,56 @@
+---
+title: "IslandMaps"
+author: "manufonn"
+date: "1/25/2020"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r echo=FALSE}
+library(leaflet)
+library(magrittr)
+library(dplyr)
+
+```
+
+
+
+```{r}
+
+islands <- read.csv("X:/MAIN_R/R_Programming_Coursera_DIRECTORY/Developing Data Products/islands.txt")
+
+islandwebs <- c(
+        "<a href='https://ivisitanguilla.com/'>Anguilla $UK</a>",
+"<a href='https://www.aruba.com/us/'>Aruba $Netherlands</a>",
+"<a href='https://www.tourismbonaire.com/'>Bonaire $Netherlands</a>",
+"<a href='https://www.bvitourism.com/'>British Virgin Is $UK</a>",
+"<a href='https://www.caymanislands.com/'>Cayman Islands $UK</a>",
+"<a href='https://www.curacao.com/en/'>Curacao $Netherlands</a>",
+"<a href='https://en.wikipedia.org/wiki/Federal_Dependencies_of_Venezuela/'>Federal Dependencies of Venezuela $Venezuela</a>",
+"<a href='https://www.guadeloupe-islands.com/'>Guadeloupe $France</a>",
+"<a href='https://us.martinique.org/'>Martinique $France</a>",
+"<a href='https://www.montserratvisita.com/en/index.html/'>Monserrat $UK</a>",
+"<a href='https://www.doi.gov/oia/islands/navassa/'>Navassa Island $USA</a>",
+"<a href='https://www.guaiqueri.net/'>Nueva Esparta $Venezuela</a>",
+"<a href='https://www.puertorico.com/'>Puerto Rico $USA</a>",
+"<a href='https://www.sabatourism.com/'>Saba Island $Netherlands</a>",
+"<a href='https://thebogotapost.com/san-andres-and-providencia-a-tale-of-two-islands/20536/'>San Andres&Providencia $Columbia</a>",
+"<a href='https://www.st-barths.com/en/'>St Barthelemy $France</a>",
+"<a href='https://www.stmartinisland.org/'>St Martin $France</a>",
+"<a href='https://www.statiatourism.com/'>Sint Eustatius $Netherlands</a>",
+"<a href='https://www.st-maarten.com/'>Sint Maarten $Netherlands</a>",
+"<a href='https://www.visittci.com/'>Turks and Caicos $USA</a>",
+"<a href='https://www.visitusvi.com/'>US Virgin Islands $USA</a>"
+)
+
+islandcord <- islands %>% select(Latitude, Longitude) %>% mutate(Longitude = Longitude*-1)    
+
+islandmap <- islandcord %>% leaflet() %>% addTiles() %>% addMarkers( popup = islandwebs)
+
+islandmap
+```
+
