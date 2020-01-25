@@ -10,7 +10,8 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-```{r echo=FALSE}
+
+```{r  comment= " ", warning=FALSE, include=FALSE}
 library(leaflet)
 library(magrittr)
 library(dplyr)
@@ -19,7 +20,7 @@ library(dplyr)
 
 
 
-```{r}
+```{r echo=FALSE, comment= " ", warning=FALSE}
 
 islands <- read.csv("X:/MAIN_R/R_Programming_Coursera_DIRECTORY/Developing Data Products/islands.txt")
 
@@ -46,11 +47,20 @@ islandwebs <- c(
 "<a href='https://www.visittci.com/'>Turks and Caicos $USA</a>",
 "<a href='https://www.visitusvi.com/'>US Virgin Islands $USA</a>"
 )
+```
+
+
+```{r warning=FALSE}
 
 islandcord <- islands %>% select(Latitude, Longitude) %>% mutate(Longitude = Longitude*-1)    
 
 islandmap <- islandcord %>% leaflet() %>% addTiles() %>% addMarkers( popup = islandwebs)
+```
 
+## *Select and visit your favorite Island!*
+
+```{r }
 islandmap
 ```
+
 
